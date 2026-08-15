@@ -16,6 +16,7 @@ class MealApp {
         this.state = this.loadState();
         this.currentRole = 'mother'; // 'mother' (一覧), 'brother1' (かいり), 'brother2' (いっけい)
         this.currentWeekOffset = 0;
+        this.isLocalUpdate = false;
 
         this.initElements();
         this.bindEvents();
@@ -38,6 +39,7 @@ class MealApp {
     saveState() {
         try {
             localStorage.setItem(APP_STORAGE_KEY, JSON.stringify(this.state));
+            this.isLocalUpdate = true;
             this.saveToFirebase();
         } catch (e) {
             console.error('Failed to save state', e);
@@ -54,6 +56,10 @@ class MealApp {
                 
                 // Realtime Listener for auto sync
                 this.db.ref('mealData').on('value', (snapshot) => {
+                    if (this.isLocalUpdate) {
+                        this.isLocalUpdate = false;
+                        return;
+                    }
                     const data = snapshot.val();
                     if (data) {
                         this.state.mealData = data;
@@ -253,7 +259,7 @@ class MealApp {
                     <table class="meal-cross-table">
                         <thead>
                             <tr>
-                                <th class="meal-col-header">区分</th>
+                                <th class="meal-col-header"></th>
                                 <th class="person-col ${canEditB1 ? 'editable-col-header' : ''}">${b1Name}</th>
                                 <th class="person-col ${canEditB2 ? 'editable-col-header' : ''}">${b2Name}</th>
                             </tr>
@@ -311,7 +317,13 @@ class MealApp {
                 data[meal] = this.getNextState(data[meal]);
 
                 this.saveState();
-                this.renderWeekView(days);
+                
+                const oxSymbol = (val) => {
+                    if (val === 'needed') return '<span class="ox-symbol-val circle">⭕</span>';
+                    if (val === 'not-needed') return '<span class="ox-symbol-val cross">✖</span>';
+                    return '<span class="ox-symbol-val unset">ー</span>';
+                };
+                targetCell.innerHTML = oxSymbol(data[meal]);
             });
         });
 
