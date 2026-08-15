@@ -1,0 +1,366 @@
+/* Apple Human Interface Guidelines Standard Clean CSS for Sakuma Family Meal Manager */
+:root {
+    --system-background: #f2f2f7;
+    --secondary-system-background: #ffffff;
+    --tertiary-system-background: #e5e5ea;
+    
+    --label-color: #1c1c1e;
+    --secondary-label-color: #8e8e93;
+    --tertiary-label-color: #c7c7cc;
+    
+    --accent-blue: #007aff;
+    --accent-green: #34c759;
+    --accent-purple: #af52de;
+    --accent-red: #ff3b30;
+    --accent-pink: #ff2d55;
+    
+    --highlight-editable-bg: rgba(52, 199, 89, 0.1);
+    --highlight-editable-text: #1b632c;
+    
+    --card-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    --sheet-shadow: 0 -8px 30px rgba(0, 0, 0, 0.12);
+    
+    --font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+    --radius-s: 8px;
+    --radius-m: 12px;
+    --radius-l: 16px;
+    --radius-full: 9999px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--system-background);
+    color: var(--label-color);
+    line-height: 1.4;
+    overflow-x: hidden;
+}
+
+#app {
+    max-width: 500px;
+    margin: 0 auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background-color: var(--system-background);
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 20px 12px;
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+}
+
+.navbar-title {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.4px;
+    text-align: center;
+}
+
+/* Segmented Control */
+.segmented-control-container {
+    padding: 12px 20px 8px;
+    background-color: var(--system-background);
+}
+
+.segmented-control {
+    display: flex;
+    background-color: #7676801f;
+    padding: 3px;
+    border-radius: var(--radius-m);
+}
+
+.segment {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 8px 12px;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--secondary-label-color);
+    border-radius: calc(var(--radius-m) - 2px);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.segment.active {
+    background-color: var(--secondary-system-background);
+    color: var(--label-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+/* Content Area */
+.content-area {
+    padding: 0 20px 40px;
+    flex: 1;
+}
+
+.view-header {
+    margin-bottom: 12px;
+}
+
+.section-title-group h2 {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+/* Date Selector Bar */
+.date-selector-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--secondary-system-background);
+    padding: 8px 16px;
+    border-radius: var(--radius-m);
+    margin-bottom: 14px;
+    box-shadow: var(--card-shadow);
+}
+
+.date-nav-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: var(--accent-blue);
+    font-weight: 600;
+    cursor: pointer;
+    padding: 4px 12px;
+}
+
+.period-label {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+/* Week Cards List */
+.week-cards-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.day-week-card {
+    background-color: var(--secondary-system-background);
+    border-radius: var(--radius-l);
+    padding: 16px;
+    box-shadow: var(--card-shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.card-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 8px;
+    border-bottom: 0.5px solid var(--tertiary-system-background);
+}
+
+.date-badge {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+}
+
+.day-date {
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.day-weekday {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--secondary-label-color);
+}
+.day-weekday.sat { color: var(--accent-blue); }
+.day-weekday.sun { color: var(--accent-red); }
+
+/* Equal Width Cross Table (区分: 22%, かいり: 39%, いっけい: 39%) */
+.meal-cross-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 2px;
+    margin-top: 4px;
+}
+
+.meal-cross-table th, .meal-cross-table td {
+    padding: 10px 4px;
+    text-align: center;
+    font-size: 14px;
+    border-radius: var(--radius-s);
+    box-sizing: border-box;
+}
+
+.meal-cross-table th.meal-col-header {
+    width: 22%;
+    font-weight: 700;
+    color: var(--secondary-label-color);
+    background-color: var(--system-background);
+}
+
+.meal-cross-table th.person-col {
+    width: 39%;
+    font-weight: 700;
+    color: var(--label-color);
+    background-color: var(--system-background);
+}
+
+.meal-cross-table td.meal-type-cell {
+    font-weight: 700;
+    color: var(--secondary-label-color);
+    background-color: var(--system-background);
+}
+
+/* Color Highlight for Editable Column without Individual Cell Borders (枠で囲わずソフト背景のみ) */
+.meal-cross-table th.editable-col-header {
+    background-color: var(--highlight-editable-bg);
+    color: var(--highlight-editable-text);
+}
+
+.ox-interactive-cell.editable {
+    background-color: var(--highlight-editable-bg);
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.15s ease;
+}
+
+.ox-interactive-cell.editable:active {
+    background-color: rgba(52, 199, 89, 0.22);
+}
+
+.ox-interactive-cell.readonly {
+    cursor: default;
+    user-select: none;
+    opacity: 0.85;
+}
+
+/* OX Symbols styling */
+.ox-symbol-val {
+    font-size: 24px;
+    line-height: 1;
+    display: inline-block;
+}
+
+.ox-symbol-val.circle {
+    color: var(--accent-green);
+}
+
+.ox-symbol-val.cross {
+    color: var(--accent-blue) !important;
+    font-weight: 900;
+    font-size: 24px;
+    font-family: Arial, sans-serif;
+}
+
+.ox-symbol-val.unset {
+    color: var(--tertiary-label-color);
+    font-weight: 300;
+    font-size: 20px;
+}
+
+/* Note Input & Display */
+.card-note-box {
+    background-color: var(--system-background);
+    padding: 8px 12px;
+    border-radius: var(--radius-s);
+    font-size: 13px;
+    color: var(--label-color);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.note-author {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent-purple);
+}
+
+.hig-textarea {
+    width: 100%;
+    border: 1px solid var(--tertiary-system-background);
+    border-radius: var(--radius-s);
+    padding: 8px 12px;
+    font-family: inherit;
+    font-size: 13px;
+    background-color: var(--system-background);
+    outline: none;
+    resize: none;
+}
+
+.hig-textarea.editable-note {
+    background-color: #ffffff;
+    border-color: rgba(52, 199, 89, 0.3);
+}
+
+.hig-textarea:focus {
+    border-color: var(--accent-blue);
+    background-color: #ffffff;
+}
+
+/* Gift Button Area */
+.gift-button-container {
+    margin-top: 24px;
+    padding: 0 4px;
+}
+
+.gift-button {
+    background: linear-gradient(135deg, #ff2d55, #ff3b30);
+    color: #ffffff;
+    width: 100%;
+    padding: 16px 20px;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: var(--radius-l);
+    box-shadow: 0 4px 16px rgba(255, 45, 85, 0.3);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.gift-button:active {
+    transform: scale(0.98);
+    opacity: 0.95;
+}
+
+/* Toast */
+.toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background-color: rgba(28, 28, 30, 0.92);
+    color: #ffffff;
+    padding: 12px 24px;
+    border-radius: var(--radius-full);
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    z-index: 2000;
+    transition: transform 0.25s ease;
+    backdrop-filter: blur(10px);
+}
+
+.toast.show {
+    transform: translateX(-50%) translateY(0);
+}
